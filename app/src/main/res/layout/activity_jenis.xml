@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".JenisActivity">
+
+
+    <Button
+        android:id="@+id/demam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demam"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/sakit_perut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sakit Perut"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/sakit_gigi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sakit Gigi"/>
+</LinearLayout>
