@@ -12,14 +12,16 @@ import java.util.HashMap;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
-    static final String DATABASE_NAME = "daftar_obat.db";
+    private static final int DATABASE_VERSION = 4;
+
+    static final String DATABASE_NAME = "daftar_oubat.db";
     public static final String TABLE_DEMAM = "demam";
     public static final String TABLE_GIGI = "gigi";
     public static final String TABLE_PERUT = "perut";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAMA = "nama";
     public static final String COLUMN_DESKRIPSI = "deskripsi";
+    public static final String COLUMN_IMAGE_PATH = "image_path";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,7 +38,8 @@ public class DbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_TABLE = "CREATE TABLE " + tableName + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAMA + " TEXT NOT NULL, " +
-                COLUMN_DESKRIPSI + " TEXT NOT NULL)";
+                COLUMN_DESKRIPSI + " TEXT NOT NULL, " +
+                COLUMN_IMAGE_PATH + " TEXT)";
         db.execSQL(SQL_CREATE_TABLE);
     }
 
@@ -48,11 +51,13 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(String tableName, String nama, String deskripsi) {
+    public void insertWithImage(String tableName, String nama, String deskripsi, String imagePath) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAMA, nama);
         values.put(COLUMN_DESKRIPSI, deskripsi);
+        values.put(COLUMN_IMAGE_PATH, imagePath);
+
         try {
             database.insert(tableName, null, values);
             Log.e("insert sqlite", "Data added to " + tableName);
@@ -61,11 +66,12 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void update(String tableName, int id, String nama, String deskripsi) {
+    public void updateWithImage(String tableName, int id, String nama, String deskripsi, String imagePath) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAMA, nama);
         values.put(COLUMN_DESKRIPSI, deskripsi);
+        values.put(COLUMN_IMAGE_PATH, imagePath);
 
         database.update(tableName, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
         Log.e("update sqlite", "Data updated in " + tableName);
@@ -77,11 +83,12 @@ public class DbHelper extends SQLiteOpenHelper {
         Log.e("delete sqlite", "Data deleted from " + tableName);
     }
 
-
+    // Metode untuk mengambil semua data dari tabel
     public ArrayList<HashMap<String, String>> getAllData(String tableName) {
         ArrayList<HashMap<String, String>> wordList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + tableName;
         SQLiteDatabase database = this.getWritableDatabase();
+
         try (Cursor cursor = database.rawQuery(selectQuery, null)) {
             while (cursor.moveToNext()) {
                 HashMap<String, String> map = new HashMap<>();

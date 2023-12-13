@@ -2,14 +2,26 @@ package model;
 
 public class Data {
 
-    private String id, nama, deskripsi;
+    private String id, nama, deskripsi, imagePath;
 
-    public Data(){
+    // Konstruktor
+    public Data(String id, String nama, String deskripsi, String imagePath) {
         this.id = id;
         this.nama = nama;
         this.deskripsi = deskripsi;
+        this.imagePath = imagePath;
     }
 
+    // Getter dan setter untuk atribut imagePath
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    // Getter dan setter lainnya
     public String getId() {
         return id;
     }
@@ -17,7 +29,6 @@ public class Data {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getNama() {
         return nama;
@@ -35,4 +46,3 @@ public class Data {
         this.deskripsi = deskripsi;
     }
 }
-
