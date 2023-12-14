@@ -24,7 +24,7 @@
             app:cardElevation="5dp">
 
             <ImageView
-                android:id="@+id/gambar"
+                android:id="@+id/imagePath"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/baseline_image_24"

@@ -83,7 +83,6 @@ public class DbHelper extends SQLiteOpenHelper {
         Log.e("delete sqlite", "Data deleted from " + tableName);
     }
 
-    // Metode untuk mengambil semua data dari tabel
     public ArrayList<HashMap<String, String>> getAllData(String tableName) {
         ArrayList<HashMap<String, String>> wordList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + tableName;
@@ -95,6 +94,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 map.put(COLUMN_ID, cursor.getString(0));
                 map.put(COLUMN_NAMA, cursor.getString(1));
                 map.put(COLUMN_DESKRIPSI, cursor.getString(2));
+                map.put(COLUMN_IMAGE_PATH, cursor.getString(3)); // Tambahkan kolom gambar ke dalam HashMap
                 wordList.add(map);
             }
         } catch (Exception e) {

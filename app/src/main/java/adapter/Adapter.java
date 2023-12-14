@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.epotik.R;
-
 
 import model.Data;
 
@@ -36,7 +37,7 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) { // Fix the method signature
+    public long getItemId(int position) {
         return position;
     }
 
@@ -51,12 +52,20 @@ public class Adapter extends BaseAdapter {
         TextView id = convertView.findViewById(R.id.id);
         TextView name = convertView.findViewById(R.id.nama);
         TextView deskripsi = convertView.findViewById(R.id.deskripsi);
+        ImageView imagePath = convertView.findViewById(R.id.imagePath);
 
         Data data = items.get(position);
 
         id.setText(data.getId());
         name.setText(data.getNama());
         deskripsi.setText(data.getDeskripsi());
+
+        // Pemeriksaan null sebelum menampilkan gambar
+        if (imagePath != null && data.getImagePath() != null) {
+            Glide.with(activity)
+                    .load(data.getImagePath())
+                    .into(imagePath);
+        }
 
         return convertView;
     }

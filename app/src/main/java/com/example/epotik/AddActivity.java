@@ -1,12 +1,9 @@
 package com.example.epotik;
 
-import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -54,7 +51,7 @@ public class AddActivity extends AppCompatActivity {
         deskripsi = findViewById(R.id.deskripsi);
         btnCancel = findViewById(R.id.btn_cancel);
         upload = findViewById(R.id.upload);
-        imageView = findViewById(R.id.gambar);
+        imageView = findViewById(R.id.imagePath);
 
         SQLite = new DbHelper(this);
 

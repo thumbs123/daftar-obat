@@ -35,14 +35,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView id, nama, deskripsi;
-        ImageView gambar; // Tambahkan ImageView untuk menampilkan gambar
+        ImageView imagePath;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             id = itemView.findViewById(R.id.id);
             nama = itemView.findViewById(R.id.nama);
             deskripsi = itemView.findViewById(R.id.deskripsi);
-            gambar = itemView.findViewById(R.id.gambar); // Inisialisasi ImageView
+            imagePath = itemView.findViewById(R.id.imagePath);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,7 +72,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_obat, parent, false);
-        return new ViewHolder(view, listener);
+        ViewHolder viewHolder = new ViewHolder(view, listener);
+
+        // Hapus inisialisasi elemen yang mungkin null karena sudah diinisialisasi di ViewHolder
+
+        return viewHolder;
     }
 
     @Override
@@ -89,14 +93,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
 
             // Pemeriksaan null sebelum menampilkan gambar
-            if (holder.gambar != null && data.getImagePath() != null) {
+            if (holder.imagePath != null && data.getImagePath() != null) {
                 Glide.with(context)
                         .load(data.getImagePath())
-                        .into(holder.gambar);
+                        .into(holder.imagePath);
             }
         }
     }
-
 
     @Override
     public int getItemCount() {
