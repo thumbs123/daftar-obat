@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                Intent intent = new Intent(MainActivity.this, Tambah.class);
                 startActivity(intent);
             }
         });

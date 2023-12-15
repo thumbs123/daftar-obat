@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class JenisActivity extends AppCompatActivity {
+public class Tambah extends AppCompatActivity {
 
     Button demam, sakitPerut, sakitGigi;
 
@@ -22,21 +22,21 @@ public class JenisActivity extends AppCompatActivity {
         demam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(JenisActivity.this, DemamActivity.class);
+                Intent intent = new Intent(Tambah.this, AddActivity.class);
                 startActivity(intent);
             }
         });
         sakitPerut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(JenisActivity.this, PerutActivity.class);
+                Intent intent = new Intent(Tambah.this, Add1.class);
                 startActivity(intent);
             }
         });
         sakitGigi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(JenisActivity.this, GigiActivity.class);
+                Intent intent = new Intent(Tambah.this, Add2.class);
                 startActivity(intent);
             }
         });

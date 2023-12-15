@@ -43,10 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Nama Obat"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/white"
             android:padding="12dp"
             android:inputType="textCapWords"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/deskripsi"
@@ -54,10 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Deskripsi"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/white"
             android:padding="12dp"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/upload"

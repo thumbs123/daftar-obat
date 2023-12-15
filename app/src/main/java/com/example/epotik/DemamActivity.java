@@ -37,7 +37,7 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
 
         dbHelper = new DbHelper(getApplicationContext());
         adapter = new RecyclerViewAdapter(DemamActivity.this, itemList);
-        recyclerView = findViewById(R.id.recycler_view); // Remove redundant declaration
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -99,7 +99,7 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
             String id = data.get(i).get(TAG_ID);
             String nama = data.get(i).get(TAG_NAMA);
             String deskripsi = data.get(i).get(TAG_DESKRIPSI);
-            String imagePath = data.get(i).get(DbHelper.COLUMN_IMAGE_PATH); // Get image path from data
+            String imagePath = data.get(i).get(DbHelper.COLUMN_IMAGE_PATH);
 
             Data dataItem = new Data(id, nama, deskripsi, imagePath);
             itemList.add(dataItem);
