@@ -27,6 +27,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
     public static final String TAG_ID = "id";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_DESKRIPSI = "deskripsi";
+    public static final String COLUMN_IMAGE_PATH = "imagePath";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,13 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
         String id = itemList.get(position).getId();
         String nama = itemList.get(position).getNama();
         String deskripsi = itemList.get(position).getDeskripsi();
-
+        String imagePath = itemList.get(position).getImagePath();
         Intent intent = new Intent(GigiActivity.this, Add2.class);
 
-        intent.putExtra(GigiActivity.TAG_ID, id);
-        intent.putExtra(GigiActivity.TAG_NAMA, nama);
-        intent.putExtra(GigiActivity.TAG_DESKRIPSI, deskripsi);
+        intent.putExtra(PerutActivity.TAG_ID, id);
+        intent.putExtra(PerutActivity.TAG_NAMA, nama);
+        intent.putExtra(PerutActivity.TAG_DESKRIPSI, deskripsi);
+        intent.putExtra(PerutActivity.COLUMN_IMAGE_PATH, imagePath);
 
         startActivity(intent);
     }
@@ -64,6 +66,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
         final String id = itemList.get(position).getId();
         final String nama = itemList.get(position).getNama();
         final String deskripsi = itemList.get(position).getDeskripsi();
+        final String imagePath = itemList.get(position).getImagePath();
 
         final CharSequence[] dialogItems = {"Edit", "Delete"};
         dialog = new AlertDialog.Builder(GigiActivity.this);
@@ -77,6 +80,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_NAMA, nama);
                         intent.putExtra(TAG_DESKRIPSI, deskripsi);
+                        intent.putExtra(COLUMN_IMAGE_PATH,imagePath);
                         startActivity(intent);
                         break;
                     case 1:

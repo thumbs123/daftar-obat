@@ -8,12 +8,18 @@
     android:padding="16dp"
     tools:context=".JenisActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/logo"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/demam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Demam"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"/>
 
     <Button

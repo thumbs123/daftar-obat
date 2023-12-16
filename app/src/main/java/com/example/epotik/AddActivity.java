@@ -27,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+
 import java.util.Objects;
 
 import helper.DbHelper;
@@ -46,6 +48,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+
         id = findViewById(R.id.id);
         nama = findViewById(R.id.nama);
         deskripsi = findViewById(R.id.deskripsi);
@@ -53,20 +56,30 @@ public class AddActivity extends AppCompatActivity {
         upload = findViewById(R.id.upload);
         imageView = findViewById(R.id.imagePath);
 
+
         SQLite = new DbHelper(this);
 
-        String receivedId = getIntent().getStringExtra(DemamActivity.TAG_ID);
-        String receivedNama = getIntent().getStringExtra(DemamActivity.TAG_NAMA);
-        String receivedDeskripsi = getIntent().getStringExtra(DemamActivity.TAG_DESKRIPSI);
+
+        Intent intent = getIntent();
+        String receivedId = intent.getStringExtra(DemamActivity.TAG_ID);
+        String receivedNama = intent.getStringExtra(DemamActivity.TAG_NAMA);
+        String receivedDeskripsi = intent.getStringExtra(DemamActivity.TAG_DESKRIPSI);
+        String receivedImagePath = intent.getStringExtra(DemamActivity.COLUMN_IMAGE_PATH);
+
 
         if (TextUtils.isEmpty(receivedId)) {
-            setTitle("Add data");
+            setTitle("Tambah data");
         } else {
             setTitle("Edit Data");
             id.setText(receivedId);
             nama.setText(receivedNama);
             deskripsi.setText(receivedDeskripsi);
+
+            if (!TextUtils.isEmpty(receivedImagePath)) {
+                Glide.with(this).load(receivedImagePath).into(imageView);
+            }
         }
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +92,16 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+
                     if (TextUtils.isEmpty(id.getText().toString().trim())) {
                         save();
                     } else {
+
                         edit();
                     }
                 } catch (Exception e) {
@@ -94,14 +110,17 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Membersihkan input dan menutup activity
                 blank();
                 finish();
             }
         });
     }
+
 
     private void pickImageGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -109,6 +128,7 @@ public class AddActivity extends AppCompatActivity {
         galleryActivityResultLauncher.launch(intent);
     }
 
+    // Menangani hasil pemilihan gambar dari galeri
     private final ActivityResultLauncher<Intent> galleryActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -121,51 +141,64 @@ public class AddActivity extends AppCompatActivity {
                             Uri imageUri = data.getData();
                             Log.d(TAG, "onActivityResult: " + imageUri);
 
-                            // Tampilkan gambar pada ImageView
-                            imageView.setImageURI(imageUri);
+                            // Menampilkan gambar yang dipilih di ImageView menggunakan Glide
+                            Glide.with(AddActivity.this).load(imageUri).into(imageView);
                         }
                     } else {
-                        Toast.makeText(AddActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddActivity.this, "Dibatalkan", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
     );
 
+    // Memeriksa izin penyimpanan
     private boolean checkStoragePermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
+    // Meminta izin penyimpanan jika belum diberikan
     private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
     }
 
+    // Menyimpan data baru ke database SQLite
     private void save() {
         if (TextUtils.isEmpty(nama.getText().toString().trim()) || TextUtils.isEmpty(deskripsi.getText().toString().trim())) {
-            Toast.makeText(getApplicationContext(), "Please input name or description...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi...", Toast.LENGTH_SHORT).show();
         } else {
+            // Mengambil URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
+
+            // Menyimpan data ke database SQLite
             SQLite.insertWithImage(DbHelper.TABLE_DEMAM, nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
 
+            // Membersihkan input dan menutup activity
             blank();
             finish();
-            Toast.makeText(getApplicationContext(), "Data added successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Data berhasil ditambahkan!", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // Mengedit data di database SQLite
     private void edit() {
         if (TextUtils.isEmpty(nama.getText().toString()) || TextUtils.isEmpty(deskripsi.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Please input name or description..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi..", Toast.LENGTH_SHORT).show();
         } else {
+            // Mengambil URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
+
+            // Mengupdate data di database SQLite berdasarkan ID
             SQLite.updateWithImage(DbHelper.TABLE_DEMAM, Integer.parseInt(id.getText().toString().trim()), nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
 
+            // Membersihkan input dan menutup activity
             blank();
             finish();
-            Toast.makeText(getApplicationContext(), "Data updated successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Data berhasil diperbarui!", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // Membersihkan input
     private void blank() {
         nama.requestFocus();
         id.setText(null);
@@ -174,17 +207,21 @@ public class AddActivity extends AppCompatActivity {
         imageView.setImageResource(android.R.color.transparent);
     }
 
+    // Mengubah ImageView menjadi Uri
     private Uri imageViewToUri(ImageView imageView) {
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Image Description", null);
+        // Menyimpan gambar ke penyimpanan dan mendapatkan URI
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Deskripsi Gambar", null);
         return Uri.parse(path);
     }
 
+    // Menangani ketika tombol kembali ditekan
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        // Menutup activity
         finish();
     }
 }

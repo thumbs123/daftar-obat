@@ -1,14 +1,13 @@
 package com.example.epotik;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import helper.DbHelper;
 import model.Data;
 
 public class DemamActivity extends AppCompatActivity implements RecyclerViewAdapter.OnItemClickListener {
-
     private RecyclerView recyclerView;
     private AlertDialog.Builder dialog;
     private List<Data> itemList = new ArrayList<>();
@@ -29,6 +27,7 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
     public static final String TAG_ID = "id";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_DESKRIPSI = "deskripsi";
+    public static final String COLUMN_IMAGE_PATH = "imagePath";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +50,13 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
         String id = itemList.get(position).getId();
         String nama = itemList.get(position).getNama();
         String deskripsi = itemList.get(position).getDeskripsi();
-
+        String imagePath = itemList.get(position).getImagePath();
         Intent intent = new Intent(DemamActivity.this, AddActivity.class);
 
-        intent.putExtra(DemamActivity.TAG_ID, id);
-        intent.putExtra(DemamActivity.TAG_NAMA, nama);
-        intent.putExtra(DemamActivity.TAG_DESKRIPSI, deskripsi);
+        intent.putExtra(PerutActivity.TAG_ID, id);
+        intent.putExtra(PerutActivity.TAG_NAMA, nama);
+        intent.putExtra(PerutActivity.TAG_DESKRIPSI, deskripsi);
+        intent.putExtra(PerutActivity.COLUMN_IMAGE_PATH, imagePath);
 
         startActivity(intent);
     }
@@ -66,6 +66,7 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
         final String id = itemList.get(position).getId();
         final String nama = itemList.get(position).getNama();
         final String deskripsi = itemList.get(position).getDeskripsi();
+        final String imagePath = itemList.get(position).getImagePath();
 
         final CharSequence[] dialogItems = {"Edit", "Delete"};
         dialog = new AlertDialog.Builder(DemamActivity.this);
@@ -79,6 +80,7 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_NAMA, nama);
                         intent.putExtra(TAG_DESKRIPSI, deskripsi);
+                        intent.putExtra(COLUMN_IMAGE_PATH,imagePath);
                         startActivity(intent);
                         break;
                     case 1:
