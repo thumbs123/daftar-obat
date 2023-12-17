@@ -27,8 +27,8 @@
                 android:id="@+id/imagePath"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/baseline_image_24"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/baseline_image_24" />
 
         </com.google.android.material.card.MaterialCardView>
         <EditText
@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Nama Obat"
-            android:backgroundTint="@color/white"
+            android:background="@color/lavender"
+            android:layout_marginTop="20dp"
             android:padding="12dp"
             android:inputType="textCapWords"
             android:textColor="@android:color/white" />
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Deskripsi"
-            android:backgroundTint="@color/white"
+            android:background="@color/lavender"
             android:padding="12dp"
             android:inputType="textMultiLine"
             android:textColor="@android:color/white" />

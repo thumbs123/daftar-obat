@@ -32,7 +32,7 @@ public class PerutActivity extends AppCompatActivity implements RecyclerViewAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demam);
+        setContentView(R.layout.activity_perut);
 
         dbHelper = new DbHelper(getApplicationContext());
         adapter = new RecyclerViewAdapter(PerutActivity.this, itemList);

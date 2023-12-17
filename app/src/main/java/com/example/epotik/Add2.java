@@ -167,31 +167,23 @@ public class Add2 extends AppCompatActivity {
         if (TextUtils.isEmpty(nama.getText().toString().trim()) || TextUtils.isEmpty(deskripsi.getText().toString().trim())) {
             Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi...", Toast.LENGTH_SHORT).show();
         } else {
-            // Mengambil URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
-
-            // Menyimpan data ke database SQLite
             SQLite.insertWithImage(DbHelper.TABLE_GIGI, nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
 
-            // Membersihkan input dan menutup activity
-            blank();
+            Intent intent = new Intent(Add2.this, GigiActivity.class);
+            startActivity(intent);
             finish();
             Toast.makeText(getApplicationContext(), "Data berhasil ditambahkan!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Mengedit data di database SQLite
     private void edit() {
         if (TextUtils.isEmpty(nama.getText().toString()) || TextUtils.isEmpty(deskripsi.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi..", Toast.LENGTH_SHORT).show();
         } else {
-            // Mengambil URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
-
-            // Mengupdate data di database SQLite berdasarkan ID
             SQLite.updateWithImage(DbHelper.TABLE_GIGI, Integer.parseInt(id.getText().toString().trim()), nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
 
-            // Membersihkan input dan menutup activity
             blank();
             finish();
             Toast.makeText(getApplicationContext(), "Data berhasil diperbarui!", Toast.LENGTH_SHORT).show();

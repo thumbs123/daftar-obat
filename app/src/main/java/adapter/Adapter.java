@@ -60,13 +60,11 @@ public class Adapter extends BaseAdapter {
         name.setText(data.getNama());
         deskripsi.setText(data.getDeskripsi());
 
-        // Pemeriksaan null sebelum menampilkan gambar
         if (imagePath != null && data.getImagePath() != null) {
             Glide.with(activity)
                     .load(data.getImagePath())
                     .into(imagePath);
         }
-
         return convertView;
     }
 }

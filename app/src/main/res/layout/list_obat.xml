@@ -45,7 +45,7 @@
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/nama"
@@ -72,11 +72,10 @@
             android:layout_toEndOf="@id/imagePath"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imagePath"
             app:layout_constraintTop_toTopOf="@+id/imagePath"
-            tools:text="Waktu" />
+            tools:text="Deskripsi" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

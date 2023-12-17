@@ -167,14 +167,12 @@ public class Add1 extends AppCompatActivity {
         if (TextUtils.isEmpty(nama.getText().toString().trim()) || TextUtils.isEmpty(deskripsi.getText().toString().trim())) {
             Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi...", Toast.LENGTH_SHORT).show();
         } else {
-            // Mengambil URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
-
-            // Menyimpan data ke database SQLite
             SQLite.insertWithImage(DbHelper.TABLE_PERUT, nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
 
-            // Membersihkan input dan menutup activity
-            blank();
+
+            Intent intent = new Intent(Add1.this, PerutActivity.class);
+            startActivity(intent);
             finish();
             Toast.makeText(getApplicationContext(), "Data berhasil ditambahkan!", Toast.LENGTH_SHORT).show();
         }

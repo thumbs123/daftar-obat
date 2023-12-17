@@ -4,7 +4,7 @@ public class Data {
 
     private String id, nama, deskripsi, imagePath;
 
-    // Konstruktor
+
     public Data(String id, String nama, String deskripsi, String imagePath) {
         this.id = id;
         this.nama = nama;
@@ -12,7 +12,7 @@ public class Data {
         this.imagePath = imagePath;
     }
 
-    // Getter dan setter untuk atribut imagePath
+
     public String getImagePath() {
         return imagePath;
     }
@@ -21,7 +21,7 @@ public class Data {
         this.imagePath = imagePath;
     }
 
-    // Getter dan setter lainnya
+
     public String getId() {
         return id;
     }

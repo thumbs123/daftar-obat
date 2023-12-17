@@ -87,12 +87,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.id.setText(data.getId());
             holder.nama.setText(data.getNama());
 
-            // Pemeriksaan null sebelum setText
+
             if (holder.deskripsi != null) {
                 holder.deskripsi.setText(data.getDeskripsi());
             }
 
-            // Pemeriksaan null sebelum menampilkan gambar
             if (holder.imagePath != null && data.getImagePath() != null) {
                 Glide.with(context)
                         .load(data.getImagePath())
@@ -100,7 +99,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
     }
-
     @Override
     public int getItemCount() {
         return itemList.size();

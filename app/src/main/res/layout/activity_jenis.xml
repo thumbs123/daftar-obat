@@ -20,18 +20,21 @@
         android:layout_height="wrap_content"
         android:text="Demam"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/lavender" />
 
     <Button
         android:id="@+id/sakit_perut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sakit Perut"
+        android:backgroundTint="@color/lavender"
         android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/sakit_gigi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/lavender"
         android:text="Sakit Gigi"/>
 </LinearLayout>

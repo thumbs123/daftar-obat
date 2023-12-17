@@ -13,7 +13,6 @@ import java.util.HashMap;
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 4;
-
     static final String DATABASE_NAME = "daftar_oubat.db";
     public static final String TABLE_DEMAM = "demam";
     public static final String TABLE_GIGI = "gigi";
@@ -94,7 +93,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 map.put(COLUMN_ID, cursor.getString(0));
                 map.put(COLUMN_NAMA, cursor.getString(1));
                 map.put(COLUMN_DESKRIPSI, cursor.getString(2));
-                map.put(COLUMN_IMAGE_PATH, cursor.getString(3)); // Tambahkan kolom gambar ke dalam HashMap
+                map.put(COLUMN_IMAGE_PATH, cursor.getString(3));
                 wordList.add(map);
             }
         } catch (Exception e) {

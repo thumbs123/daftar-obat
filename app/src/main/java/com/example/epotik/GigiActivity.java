@@ -32,7 +32,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demam);
+        setContentView(R.layout.activity_gigi);
 
         dbHelper = new DbHelper(getApplicationContext());
         adapter = new RecyclerViewAdapter(GigiActivity.this, itemList);
