@@ -80,18 +80,38 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_NAMA, nama);
                         intent.putExtra(TAG_DESKRIPSI, deskripsi);
-                        intent.putExtra(COLUMN_IMAGE_PATH,imagePath);
+                        intent.putExtra(COLUMN_IMAGE_PATH, imagePath);
                         startActivity(intent);
                         break;
                     case 1:
-                        dbHelper.delete(DbHelper.TABLE_DEMAM, Integer.parseInt(id));
-                        itemList.clear();
-                        getAllData();
+                        showDeleteConfirmationDialog(id);
                         break;
                 }
             }
         }).show();
     }
+
+    private void showDeleteConfirmationDialog(final String id) {
+        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(this);
+        deleteDialog.setTitle("Konfirmasi");
+        deleteDialog.setMessage("Apakah anda yakin ingin menghapus data?");
+        deleteDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dbHelper.delete(DbHelper.TABLE_DEMAM, Integer.parseInt(id));
+                itemList.clear();
+                getAllData();
+            }
+        });
+        deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        deleteDialog.show();
+    }
+
 
     private void getAllData() {
         itemList.clear();
@@ -114,5 +134,10 @@ public class DemamActivity extends AppCompatActivity implements RecyclerViewAdap
         super.onResume();
         itemList.clear();
         getAllData();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
