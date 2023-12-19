@@ -51,7 +51,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
         String nama = itemList.get(position).getNama();
         String deskripsi = itemList.get(position).getDeskripsi();
         String imagePath = itemList.get(position).getImagePath();
-        Intent intent = new Intent(GigiActivity.this, Add2.class);
+        Intent intent = new Intent(GigiActivity.this, Edit2.class);
 
         intent.putExtra(PerutActivity.TAG_ID, id);
         intent.putExtra(PerutActivity.TAG_NAMA, nama);
@@ -76,7 +76,7 @@ public class GigiActivity extends AppCompatActivity implements RecyclerViewAdapt
             public void onClick(DialogInterface dialogInterface, int which) {
                 switch (which) {
                     case 0:
-                        Intent intent = new Intent(GigiActivity.this, Add2.class);
+                        Intent intent = new Intent(GigiActivity.this, Edit2.class);
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_NAMA, nama);
                         intent.putExtra(TAG_DESKRIPSI, deskripsi);

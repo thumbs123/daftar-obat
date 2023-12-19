@@ -40,6 +40,12 @@
             android:name=".Add1"
             android:exported="false" />
         <activity
+            android:name=".Edit1"
+            android:exported="false" />
+        <activity
+            android:name=".Edit2"
+            android:exported="false" />
+        <activity
             android:name=".Add2"
             android:exported="false" />
         <activity

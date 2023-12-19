@@ -51,7 +51,7 @@ public class PerutActivity extends AppCompatActivity implements RecyclerViewAdap
         String nama = itemList.get(position).getNama();
         String deskripsi = itemList.get(position).getDeskripsi();
         String imagePath = itemList.get(position).getImagePath();
-        Intent intent = new Intent(PerutActivity.this, Add1.class);
+        Intent intent = new Intent(PerutActivity.this, Edit1.class);
 
         intent.putExtra(PerutActivity.TAG_ID, id);
         intent.putExtra(PerutActivity.TAG_NAMA, nama);
@@ -76,7 +76,7 @@ public class PerutActivity extends AppCompatActivity implements RecyclerViewAdap
             public void onClick(DialogInterface dialogInterface, int which) {
                 switch (which) {
                     case 0:
-                        Intent intent = new Intent(PerutActivity.this, Add1.class);
+                        Intent intent = new Intent(PerutActivity.this, Edit1.class);
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_NAMA, nama);
                         intent.putExtra(TAG_DESKRIPSI, deskripsi);

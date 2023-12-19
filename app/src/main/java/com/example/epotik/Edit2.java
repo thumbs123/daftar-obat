@@ -33,9 +33,9 @@ import java.util.Objects;
 
 import helper.DbHelper;
 
-public class EditActivity extends AppCompatActivity {
+public class Edit2 extends AppCompatActivity {
     private static final int STORAGE_REQUEST_CODE = 100;
-    private static final String TAG = "EditActivity";
+    private static final String TAG = "Edit2";
 
     EditText id, nama, deskripsi;
     Button btnCancel, upload;
@@ -57,10 +57,10 @@ public class EditActivity extends AppCompatActivity {
         SQLite = new DbHelper(this);
 
         Intent intent = getIntent();
-        String receivedId = intent.getStringExtra(DemamActivity.TAG_ID);
-        String receivedNama = intent.getStringExtra(DemamActivity.TAG_NAMA);
-        String receivedDeskripsi = intent.getStringExtra(DemamActivity.TAG_DESKRIPSI);
-        String receivedImagePath = intent.getStringExtra(DemamActivity.COLUMN_IMAGE_PATH);
+        String receivedId = intent.getStringExtra(GigiActivity.TAG_ID);
+        String receivedNama = intent.getStringExtra(GigiActivity.TAG_NAMA);
+        String receivedDeskripsi = intent.getStringExtra(GigiActivity.TAG_DESKRIPSI);
+        String receivedImagePath = intent.getStringExtra(GigiActivity.COLUMN_IMAGE_PATH);
 
         // Mengatur judul Activity berdasarkan mode Tambah/Edit
         if (TextUtils.isEmpty(receivedId)) {
@@ -134,10 +134,10 @@ public class EditActivity extends AppCompatActivity {
                             Log.d(TAG, "onActivityResult: " + imageUri);
 
                             // Menampilkan gambar yang dipilih di ImageView menggunakan Glide
-                            Glide.with(EditActivity.this).load(imageUri).into(imageView);
+                            Glide.with(Edit2.this).load(imageUri).into(imageView);
                         }
                     } else {
-                        Toast.makeText(EditActivity.this, "Dibatalkan", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Edit2.this, "Dibatalkan", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -154,7 +154,7 @@ public class EditActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
     }
 
-    // Mengedit data di database SQLite
+
     private void edit() {
         if (TextUtils.isEmpty(nama.getText().toString()) || TextUtils.isEmpty(deskripsi.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Harap masukkan nama atau deskripsi..", Toast.LENGTH_SHORT).show();
@@ -162,7 +162,7 @@ public class EditActivity extends AppCompatActivity {
             // Mendapatkan URI gambar dari ImageView
             String imagePath = Objects.requireNonNull(imageViewToUri(imageView)).toString();
             // Mengedit data di database
-            SQLite.updateWithImage(DbHelper.TABLE_DEMAM, Integer.parseInt(id.getText().toString().trim()), nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
+            SQLite.updateWithImage(DbHelper.TABLE_GIGI, Integer.parseInt(id.getText().toString().trim()), nama.getText().toString().trim(), deskripsi.getText().toString().trim(), imagePath);
             // Membersihkan input dan menutup activity
             blank();
             finish();
